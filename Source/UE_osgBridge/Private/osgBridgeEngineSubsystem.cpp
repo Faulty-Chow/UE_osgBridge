@@ -6,7 +6,7 @@
 #include "Threads/osgBridgeThreadPoolStatic.h"
 #include "Threads/osgBridgeTickableThread.h"
 #include "Threads/osgBridgeCoreThread.h"
-#include "Util/FileUtil.h"
+#include "Util/osgBridgeFileUtil.h"
 #include "Database/osgBridgeNode.h"
 #include "Database/osgBridgeDatabase.h"
 #include "osgBridgeMeshActor.h"
@@ -23,12 +23,12 @@ void UosgBridgeEngineSubsystem::SetMeshActor(AosgBridgeMeshActor* meshActor)
 void UosgBridgeEngineSubsystem::LoadNodeFiles(FString dirPath)
 {
 	std::string str_dirPath(TCHAR_TO_UTF8(*dirPath));
-	auto folders = FileUtil::GetFolders(str_dirPath);
+	auto folders = osgBridgeFileUtil::GetFolders(str_dirPath);
 	for (auto& folder : folders)
 	{
-		DatabaseKey key = FileUtil::PathCombine({ str_dirPath ,folder });
+		DatabaseKey key = osgBridgeFileUtil::PathCombine({ str_dirPath ,folder });
 		MountRootNode(key);
-		std::string nodeFilePath = FileUtil::PathCombine({ key ,folder + ".osgb" });
+		std::string nodeFilePath = osgBridgeFileUtil::PathCombine({ key ,folder + ".osgb" });
 		auto fileReadTask = GetFileReadTaskFromPool(nodeFilePath);
 		_pThreadPoolStatic->RequestExecuteTask(fileReadTask);
 	}
@@ -83,7 +83,7 @@ void UosgBridgeEngineSubsystem::Tick(float DeltaTime)
 void UosgBridgeEngineSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	_frameBuffer = 10;
-	_pThreadPoolStatic = new osgBridgeThreadPoolStatic(12);
+	_pThreadPoolStatic = new osgBridgeThreadPoolStatic(20);
 	_pThreadPoolStatic->Create();
 	_pMeshActor = nullptr;
 	_pView = new osgBridgePawn;

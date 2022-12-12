@@ -1,10 +1,10 @@
-#include "Util/FileUtil.h"
+#include "Util/osgBridgeFileUtil.h"
 #include <cstdarg>
 #include <algorithm>
 #include <sys/stat.h>
 #include <io.h>
 
-std::string FileUtil::PathCombine(std::initializer_list<std::string>&& pathList)
+std::string osgBridgeFileUtil::PathCombine(std::initializer_list<std::string>&& pathList)
 {
 	std::string result;
 	for (auto path : pathList)
@@ -20,13 +20,13 @@ std::string FileUtil::PathCombine(std::initializer_list<std::string>&& pathList)
 	return result;
 }
 
-bool FileUtil::IsFileExist(const std::string& filePath)
+bool osgBridgeFileUtil::IsFileExist(const std::string& filePath)
 {
 	struct stat buffer;
 	return stat(filePath.c_str(), &buffer) == 0;
 }
 
-std::vector<std::string> FileUtil::GetFolders(const std::string& dirPath)
+std::vector<std::string> osgBridgeFileUtil::GetFolders(const std::string& dirPath)
 {
 	std::vector<std::string> result;
 	long long handle = 0;
@@ -49,7 +49,7 @@ std::vector<std::string> FileUtil::GetFolders(const std::string& dirPath)
 	return result;
 }
 
-std::vector<std::string> FileUtil::GetFiles(const std::string& dirPath)
+std::vector<std::string> osgBridgeFileUtil::GetFiles(const std::string& dirPath)
 {
 	std::vector<std::string> result;
 	long long handle = 0;

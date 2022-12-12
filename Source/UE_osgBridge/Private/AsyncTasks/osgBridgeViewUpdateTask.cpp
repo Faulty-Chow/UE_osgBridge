@@ -7,7 +7,7 @@
 #include "Database/osgBridgeMeshSection.h"
 #include "osgBridgePawn.h"
 #include "osgBridgeMeshActor.h"
-#include "Util/FileUtil.h"
+#include "Util/osgBridgeFileUtil.h"
 #include "Threads/osgBridgeThreadPoolStatic.h"
 #include "AsyncTasks/osgBridgeFileReadTask.h"
 #include "AsyncTasks/osgBridgeDataCleanTask.h"
@@ -80,7 +80,7 @@ void osgBridgeViewUpdateTask::Traverse(osgBridgeNode* node)
 
 bool osgBridgeViewUpdateTask::LoadSuccessorFromDisk(class osgBridgePagedLOD* plod)
 {
-	std::string nodeFilePath = FileUtil::PathCombine({ std::string(_databaseKey), plod->GetSuccessorFileName() });
+	std::string nodeFilePath = osgBridgeFileUtil::PathCombine({ std::string(_databaseKey), plod->GetSuccessorFileName() });
 	osgBridgeNode* getFromCache = nullptr;
 	if (osgBridgeDatabase::GetOsgBridgeDatabase()->CheckLoadResults(nodeFilePath, getFromCache))
 	{

@@ -20,7 +20,8 @@ public:
 	virtual bool IsTickable() const override;
 	virtual bool IsTickableInEditor() const override { return false; }
 	virtual __forceinline TStatId GetStatId() const override {
-		RETURN_QUICK_DECLARE_CYCLE_STAT(UosgBridgeEngineSubsystem, STATGROUP_Tickables);
+		// RETURN_QUICK_DECLARE_CYCLE_STAT(UosgBridgeEngineSubsystem, STATGROUP_Tickables);
+		return TStatId();
 	}
 
 public:

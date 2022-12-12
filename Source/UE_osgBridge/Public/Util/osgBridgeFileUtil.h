@@ -3,7 +3,7 @@
 #include <vector>
 #include <initializer_list>
 
-class UE_OSGBRIDGE_API FileUtil
+class UE_OSGBRIDGE_API osgBridgeFileUtil
 {
 public:
 	static std::string PathCombine(std::initializer_list<std::string>&& pathList);
