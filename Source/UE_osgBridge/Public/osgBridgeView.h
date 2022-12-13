@@ -8,6 +8,8 @@
 class UE_OSGBRIDGE_API osgBridgeView :public FTickableGameObject
 {
 public:
+	static osgBridgeView* StaticView;
+public:
 	virtual void Tick(float DeltaTime) override = 0;
 	virtual bool IsTickable() const override { return false; }
 	virtual bool IsTickableInEditor() const override { return false; }

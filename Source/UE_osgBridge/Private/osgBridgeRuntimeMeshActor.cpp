@@ -27,5 +27,5 @@ void AosgBridgeRuntimeMeshActor::BeginPlay()
 void AosgBridgeRuntimeMeshActor::Tick(float deltaTime)
 {
 	AosgBridgeMeshActor::Tick(deltaTime);
-	UE_LOG(LogTemp, Warning, TEXT("AosgBridgeRuntimeMeshActor::Tick( %f )"), deltaTime);
+	// UE_LOG(LogTemp, Warning, TEXT("AosgBridgeRuntimeMeshActor::Tick( %f )"), deltaTime);
 }

@@ -1,6 +1,27 @@
 #include "osgBridgeView.h"
 #include "osgBridgeEngineSubsystem.h"
 
+class osgBridgeStaticView :public osgBridgeView
+{
+public:
+	osgBridgeStaticView()
+	{
+		_bValid = false;
+
+		_lastTickTimeStamp = -1;
+		_lastTickFrameNumber = -1;
+
+		_viewOrigin = FVector::ZeroVector;
+		/*_projectionMatrix= FMatrix::
+		FMatrix _viewProjectionMatrix;
+		FIntRect _viewSize;*/
+	}
+	virtual void Tick(float DeltaTime) override {};
+
+};
+
+osgBridgeView* osgBridgeView::StaticView;
+
 float osgBridgeView::GetSphereBoundsPixelSizeInView(const FBoxSphereBounds& sphereBounds, bool bABS /*= true*/)
 {
 	std::unique_lock<std::mutex> lock(_rwMutex);

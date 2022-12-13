@@ -37,6 +37,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "osgBridge", Meta = (DisplayName = "Set Frame Buffer"))
 		void SetFrameBuffer(int64 value) { _frameBuffer = value; }
 
+	UFUNCTION(BlueprintCallable, Category = "osgBridge", Meta = (DisplayName = "Reset osgBridge Engine Subsystem"))
+		void ResetEngineSubsystem() {}
+
 	UFUNCTION(BlueprintCallable, Category = "osgBridge", Meta = (DisplayName = "Get osgBridge Engine Subsystem"))
 		static UosgBridgeEngineSubsystem* GetOsgBridgeEngineSubsystem();
 
@@ -62,6 +65,8 @@ public:
 	bool CoreThreadTickCallback(class osgBridgeCoreThread* pThread);
 
 private:
+	bool _bResetFlag;
+
 	int64 _frameBuffer;
 
 	std::mutex _fileReadTaskPoolMutex;

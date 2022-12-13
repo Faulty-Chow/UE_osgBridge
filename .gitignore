@@ -96,3 +96,7 @@ Export/**
 
 # Unignore .gitignore
 !.gitignore
+
+# OpenSceneGraph-3.6.5-VC2022-64-Release
+!OpenSceneGraph-3.6.5-VC2022-64-Release/bin/*
+!OpenSceneGraph-3.6.5-VC2022-64-Release/lib/*
