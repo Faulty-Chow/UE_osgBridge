@@ -99,4 +99,5 @@ Export/**
 
 # OpenSceneGraph-3.6.5-VC2022-64-Release
 !OpenSceneGraph-3.6.5-VC2022-64-Release/bin/*
+!OpenSceneGraph-3.6.5-VC2022-64-Release/bin/osgPlugins-3.6.5/*
 !OpenSceneGraph-3.6.5-VC2022-64-Release/lib/*
