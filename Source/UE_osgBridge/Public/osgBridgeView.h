@@ -5,6 +5,10 @@
 #undef  PI
 #define PI 					(3.1415926535897932f)
 
+
+/*
+	UE 视角信息的基类 每帧Tick更新，注意：这个类是线程不安全的，但允许不安全的调用
+*/
 class UE_OSGBRIDGE_API osgBridgeView :public FTickableGameObject
 {
 public:

@@ -1,6 +1,9 @@
 #pragma once
 #include "osgBridgeTickableThread.h"
 
+/*
+	Version-2.0中的核心线程，与游戏线程Tick同步，在Version-3.0中弃用，场景的更新也被作为异步任务
+*/
 class UE_OSGBRIDGE_API osgBridgeCoreThread :public osgBridgeTickableThread
 {
 public:

@@ -1,6 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
 
+/*
+	AsyncTask base class
+*/
+
 class UE_OSGBRIDGE_API osgBridgeAsyncTask
 {
 public:

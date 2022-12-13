@@ -3,9 +3,15 @@
 #include <map>
 #include <vector>
 
+/*
+	全局单例 用于存放所有模型数据
+*/
 class UE_OSGBRIDGE_API osgBridgeDatabase
 {
 private:
+	/*
+		已弃用，保留只是为了兼容(maybe)
+	*/
 	struct Token {
 		explicit Token() = default;
 	};

@@ -18,6 +18,13 @@ AosgBridgeEditorMeshActor::AosgBridgeEditorMeshActor():
 	_pView = new osgBridgeViewEditor;
 }
 
+void AosgBridgeEditorMeshActor::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+	UosgBridgeEngineSubsystem::GetOsgBridgeEngineSubsystem()->SetMeshActor(this);
+	UosgBridgeEngineSubsystem::GetOsgBridgeEngineSubsystem()->LoadNodeFiles("F:\\FaultyChow\\terra_osgbs(2)\\terra_osgbs");
+}
+
 void AosgBridgeEditorMeshActor::BeginPlay()
 {
 	AosgBridgeMeshActor::BeginPlay();

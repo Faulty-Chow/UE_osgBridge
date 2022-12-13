@@ -3,6 +3,10 @@
 #include <mutex>
 #include <condition_variable>
 
+/*
+	可以与游戏线程并行Tick的线程基类
+	通过Tick和WaitForTick两个静态函数与游戏线程同步
+*/
 class UE_OSGBRIDGE_API osgBridgeTickableThread :public osgBridgeBaseThread
 {
 public:

@@ -6,6 +6,9 @@
 #include "GameFramework/Actor.h"
 #include "osgBridgeMeshActor.generated.h"
 
+/*
+	用于显示模型的Actor基类，请使用它的子类，最好保证全局唯一
+*/
 UCLASS()
 class UE_OSGBRIDGE_API AosgBridgeMeshActor : public AActor
 {

@@ -53,8 +53,7 @@ void UosgBridgeEngineSubsystem::Tick(float DeltaTime)
 
 void UosgBridgeEngineSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
-	_bResetFlag = false;
-	_frameBuffer = 10;
+	_frameBuffer = 5;
 	_pThreadPoolStatic = new osgBridgeThreadPoolStatic(20);
 	_pThreadPoolStatic->Create();
 	_pMeshActor = nullptr;
@@ -150,18 +149,13 @@ void UosgBridgeEngineSubsystem::MountRootNode(DatabaseKey databaseKey)
 bool UosgBridgeEngineSubsystem::CoreThreadTickCallback(osgBridgeCoreThread* pThread)
 {
 	static int32 index = 0;
-	if (_bResetFlag)
-		return false;
-	else
+	std::unique_lock<std::mutex> lock(_mountRootNodeListMutex);
+	if (index < _mountRootNodeList.Num())
 	{
-		std::unique_lock<std::mutex> lock(_mountRootNodeListMutex);
-		if (index < _mountRootNodeList.Num())
-		{
-			pThread->SetDatabaseKey(_mountRootNodeList[index]);
-			++index;
-			return true;
-		}
-		else
-			return false;
+		pThread->SetDatabaseKey(_mountRootNodeList[index]);
+		++index;
+		return true;
 	}
+	else
+		return false;
 }

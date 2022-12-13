@@ -2,6 +2,9 @@
 #include "CoreMinimal.h"
 #include "Threads/osgBridgeTaskThread.h"
 
+/*
+	线程池基类
+*/
 class UE_OSGBRIDGE_API osgBridgeThreadPoolBase
 {
 public:

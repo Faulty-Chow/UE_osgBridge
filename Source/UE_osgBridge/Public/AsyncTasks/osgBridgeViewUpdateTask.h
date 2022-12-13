@@ -1,6 +1,9 @@
 #pragma once
 #include "osgBridgeAsyncTask.h"
 
+/*
+	视图更新任务 用于加载卸载模型的几何图形 同时执行资源释放
+*/
 class UE_OSGBRIDGE_API osgBridgeViewUpdateTask :public osgBridgeAsyncTask
 {
 public:

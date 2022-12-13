@@ -3,6 +3,9 @@
 #include <atomic>
 #include <map>
 
+/*
+	内存显存清理任务 version-3.0起弃用 内存清理任务并入更新任务
+*/
 class UE_OSGBRIDGE_API osgBridgeDataCleanTask :public osgBridgeAsyncTask
 {
 public:

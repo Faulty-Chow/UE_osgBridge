@@ -1,6 +1,9 @@
 #pragma once
 #include "osgBridgeBaseThread.h"
 
+/*
+	任务线程
+*/
 class UE_OSGBRIDGE_API osgBridgeTaskThread :public osgBridgeBaseThread
 {
 public:

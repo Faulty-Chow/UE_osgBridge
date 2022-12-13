@@ -8,6 +8,9 @@
 #include <osg/Node>
 #include <osg/ref_ptr>
 
+/*
+	从磁盘读取osgb文件 并将数据存入database中的一些类中
+*/
 class UE_OSGBRIDGE_API osgBridgeFileReadTask :public osgBridgeAsyncTask
 {
 public:

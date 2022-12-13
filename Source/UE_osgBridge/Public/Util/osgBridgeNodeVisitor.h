@@ -3,6 +3,10 @@
 #include <osg/NodeVisitor>
 #include <osg/Geode>
 
+/*
+	用于将osg的数据类型转换为UE_osgBridge的数据类型
+*/
+
 class UE_OSGBRIDGE_API osgBridgePagedLODVisitor:public osg::NodeVisitor
 {
 public:

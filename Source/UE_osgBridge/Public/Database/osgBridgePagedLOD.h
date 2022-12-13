@@ -2,6 +2,9 @@
 #include <atomic>
 #include <string>
 
+/*
+	定义模型LOD层级结构，对应与 osg::PagedLOD
+*/
 class UE_OSGBRIDGE_API osgBridgePagedLOD
 {
 public:

@@ -3,6 +3,9 @@
 
 #define ThreadLifecycleLog(Lifecycle) if(_bAllowLifecycleLog)UE_LOG(LogTemp,Warning,TEXT("%s : %s"),*_threadName,*FString(Lifecycle))
 
+/*
+	线程基类
+*/
 class UE_OSGBRIDGE_API osgBridgeBaseThread : public FRunnable
 {
 public:

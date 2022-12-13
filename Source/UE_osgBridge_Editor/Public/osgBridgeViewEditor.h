@@ -2,6 +2,9 @@
 #include "CoreMinimal.h"
 #include "osgBridgeView.h"
 
+/*
+	获取 Editor 下 ViewPort 信息
+*/
 class UE_OSGBRIDGE_EDITOR_API osgBridgeViewEditor :public osgBridgeView
 {
 public:

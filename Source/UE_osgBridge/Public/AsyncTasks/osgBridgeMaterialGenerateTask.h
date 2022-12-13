@@ -3,6 +3,9 @@
 
 #include <functional>
 
+/*
+	贴图材质生成任务
+*/
 class UE_OSGBRIDGE_API osgBridgeMaterialGenerateTask :public osgBridgeAsyncTask
 {
 public:

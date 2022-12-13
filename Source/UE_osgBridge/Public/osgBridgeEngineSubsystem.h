@@ -7,6 +7,9 @@
 #include "Subsystems/EngineSubsystem.h"
 #include "osgBridgeEngineSubsystem.generated.h"
 
+/*
+	注意：开放的所有蓝图接口谨慎使用 可能会导致关卡无法加载，C++调用是没有问题的
+*/
 UCLASS()
 class UE_OSGBRIDGE_API UosgBridgeEngineSubsystem : public UEngineSubsystem, public FTickableGameObject
 {
@@ -37,9 +40,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "osgBridge", Meta = (DisplayName = "Set Frame Buffer"))
 		void SetFrameBuffer(int64 value) { _frameBuffer = value; }
 
-	UFUNCTION(BlueprintCallable, Category = "osgBridge", Meta = (DisplayName = "Reset osgBridge Engine Subsystem"))
-		void ResetEngineSubsystem() {}
-
 	UFUNCTION(BlueprintCallable, Category = "osgBridge", Meta = (DisplayName = "Get osgBridge Engine Subsystem"))
 		static UosgBridgeEngineSubsystem* GetOsgBridgeEngineSubsystem();
 
@@ -65,8 +65,6 @@ public:
 	bool CoreThreadTickCallback(class osgBridgeCoreThread* pThread);
 
 private:
-	bool _bResetFlag;
-
 	int64 _frameBuffer;
 
 	std::mutex _fileReadTaskPoolMutex;

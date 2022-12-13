@@ -3,6 +3,9 @@
 #include "AsyncTasks/osgBridgeAsyncTaskQueue.h"
 #include <mutex>
 
+/*
+	全局单例(因为托管与EngineSubsystem)线程池 主要处理3类异步任务：场景更新，IO读取，内存拷贝
+*/
 class UE_OSGBRIDGE_API osgBridgeThreadPoolStatic :public osgBridgeThreadPoolBase
 {
 public:

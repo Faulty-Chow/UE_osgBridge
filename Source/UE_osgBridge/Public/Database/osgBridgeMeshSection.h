@@ -9,6 +9,9 @@
 #include <osg/ref_ptr>
 #include <osg/Geometry>
 
+/*
+	用于存放模型数据 对应于 osg::Drawable
+*/
 class UE_OSGBRIDGE_API osgBridgeMeshSection
 {
 public:

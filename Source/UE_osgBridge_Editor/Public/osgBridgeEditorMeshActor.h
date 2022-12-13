@@ -11,13 +11,16 @@
 #include "osgBridgeMeshActor.h"
 #include "osgBridgeEditorMeshActor.generated.h"
 
-
+/*
+	Editor下加载模型的Actor，不可以打包
+*/
 UCLASS()
 class UE_OSGBRIDGE_EDITOR_API AosgBridgeEditorMeshActor : public AosgBridgeMeshActor
 {
 	GENERATED_BODY()
 public:
 	AosgBridgeEditorMeshActor();
+	virtual void OnConstruction(const FTransform& Transform) override;
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float deltaTime) override;

@@ -3,6 +3,9 @@
 #include <osg/PagedLOD>
 #include <osg/ref_ptr>
 
+/*
+	每个.osgb被读取后都会加载一个Node
+*/
 class UE_OSGBRIDGE_API osgBridgeNode
 {
 public:

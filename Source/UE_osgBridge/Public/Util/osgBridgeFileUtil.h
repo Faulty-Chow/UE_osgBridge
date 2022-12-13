@@ -3,6 +3,9 @@
 #include <vector>
 #include <initializer_list>
 
+/*
+	文件路径工具类
+*/
 class UE_OSGBRIDGE_API osgBridgeFileUtil
 {
 public:

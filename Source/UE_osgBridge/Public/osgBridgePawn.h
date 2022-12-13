@@ -2,6 +2,9 @@
 #include "CoreMinimal.h"
 #include "osgBridgeView.h"
 
+/*
+	可以获取运行时 Pawn的视角信息
+*/
 class UE_OSGBRIDGE_API osgBridgePawn :public osgBridgeView
 {
 public:

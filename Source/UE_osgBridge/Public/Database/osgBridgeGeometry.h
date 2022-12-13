@@ -1,6 +1,9 @@
 #pragma once
 #include <vector>
 
+/*
+	模型的几何图形 场景更新时加载卸载的最小单位 对应于 osg::Geode
+*/
 class UE_OSGBRIDGE_API osgBridgeGeometry
 {
 public:

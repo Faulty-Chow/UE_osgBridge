@@ -11,7 +11,9 @@
 #include "osgBridgeMeshActor.h"
 #include "osgBridgeRuntimeMeshActor.generated.h"
 
-
+/*
+	Runtime模式 用于显示模型的Actor
+*/
 UCLASS()
 class UE_OSGBRIDGE_API AosgBridgeRuntimeMeshActor : public AosgBridgeMeshActor
 {
@@ -20,6 +22,7 @@ public:
 	AosgBridgeRuntimeMeshActor();
 
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	virtual void Tick(float deltaTime) override;
 };

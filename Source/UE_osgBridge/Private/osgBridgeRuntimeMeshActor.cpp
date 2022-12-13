@@ -13,19 +13,24 @@
 AosgBridgeRuntimeMeshActor::AosgBridgeRuntimeMeshActor():
 	AosgBridgeMeshActor()
 {
-	PrimaryActorTick.bCanEverTick = true;
 	_pView = new osgBridgePawn;
 }
 
 void AosgBridgeRuntimeMeshActor::BeginPlay()
 {
 	AosgBridgeMeshActor::BeginPlay();
+	PrimaryActorTick.bCanEverTick = true;
 	UosgBridgeEngineSubsystem::GetOsgBridgeEngineSubsystem()->SetMeshActor(this);
 	UosgBridgeEngineSubsystem::GetOsgBridgeEngineSubsystem()->LoadNodeFiles("F:\\meicheng\\osgb\\Data");
+}
+
+void AosgBridgeRuntimeMeshActor::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	PrimaryActorTick.bCanEverTick = false;
 }
 
 void AosgBridgeRuntimeMeshActor::Tick(float deltaTime)
 {
 	AosgBridgeMeshActor::Tick(deltaTime);
-	// UE_LOG(LogTemp, Warning, TEXT("AosgBridgeRuntimeMeshActor::Tick( %f )"), deltaTime);
+	UE_LOG(LogTemp, Warning, TEXT("AosgBridgeRuntimeMeshActor::Tick( %f )"), deltaTime);
 }
