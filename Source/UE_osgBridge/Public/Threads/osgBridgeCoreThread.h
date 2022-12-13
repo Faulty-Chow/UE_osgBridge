@@ -1,27 +1,25 @@
-//#pragma once
-//#include "osgBridgeBaseThread.h"
-//
-//class UE_OSGBRIDGE_API osgBridgeCoreThread :public osgBridgeBaseThread
-//{
-//public:
-//	osgBridgeCoreThread(FString threadName);
-//
-//	void StartThread() = delete;
-//	void TimeToDie(bool bShouldWait = true);
-//
-//protected:
-//	virtual uint32 Run() override;
-//
-//private:
-//	void Traverse(class osgBridgeNode* node);
-//
-//	void AddToView(class osgBridgeGeometry* geometry);
-//	void RemoveFromView(class osgBridgeGeometry* geometry);
-//	void RemoveAllGeometriesBelongTo(class osgBridgePagedLOD* plod);
-//	void ClearHigherLODs(class osgBridgePagedLOD* plod);
-//
-//private:
-//	std::atomic_bool _bTimeToDie;
-//
-//	FString _databaseKey;
-//};
+#pragma once
+#include "osgBridgeTickableThread.h"
+
+class UE_OSGBRIDGE_API osgBridgeCoreThread :public osgBridgeTickableThread
+{
+public:
+	osgBridgeCoreThread(FString threadName);
+
+	FORCEINLINE void SetDatabaseKey(std::string key) { _databaseKey = key; }
+
+protected:
+	virtual void Tick() override;
+
+private:
+	void Traverse(class osgBridgeNode* node);
+
+	bool LoadSuccessorFromDisk(class osgBridgePagedLOD* plod);
+	void ActivatePagedLOD(class osgBridgePagedLOD* plod);
+	void CullSuccessor(class osgBridgeNode* successor);
+
+private:
+	std::string _databaseKey;
+	std::vector<class osgBridgeMeshSection*> _taskCache_MeshSectionsToRender;
+	std::vector<int32> _taskCache_MeshSectionsToRemove;
+};

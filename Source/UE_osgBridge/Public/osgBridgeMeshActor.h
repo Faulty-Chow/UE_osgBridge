@@ -32,6 +32,8 @@ public:
 	void MarkMaterialPendingKill(int32 materialSlot);
 	bool IsMeshSectionVisible(int32 sectionID);
 
+	FORCEINLINE class osgBridgeView* GetViewInfo();
+
 protected:
 	void CreateSectionFromComponents(class osgBridgeMeshSection* meshSection);
 	void RemoveSection(int32 meshSectionID);
@@ -60,4 +62,7 @@ private:
 	std::mutex _materialSlotPoolMutex;
 	int32 _nextMaterialSlot;
 	TArray<int32> _materialSlotPool;
+
+protected:
+	class osgBridgeView* _pView;
 };

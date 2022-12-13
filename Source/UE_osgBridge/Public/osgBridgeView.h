@@ -5,12 +5,13 @@
 #undef  PI
 #define PI 					(3.1415926535897932f)
 
-class UE_OSGBRIDGE_API osgBridgeView
+class UE_OSGBRIDGE_API osgBridgeView :public FTickableGameObject
 {
 public:
-	virtual void Tick(float DeltaTime) = 0;
-	virtual bool IsTickable() const { return false; };
-	virtual bool IsTickableInEditor() const { return false; }
+	virtual void Tick(float DeltaTime) override = 0;
+	virtual bool IsTickable() const override { return false; }
+	virtual bool IsTickableInEditor() const override { return false; }
+	virtual __forceinline TStatId GetStatId() const override { return TStatId(); }
 
 	float GetSphereBoundsPixelSizeInView(const FBoxSphereBounds& sphereBounds, bool bABS = true);
 	bool IsSphereBoundsInView(const FBoxSphereBounds& sphereBounds);

@@ -1,4 +1,5 @@
 #include "osgBridgeMeshActor.h"
+#include "osgBridgeView.h"
 #include "Database/osgBridgeMeshSection.h"
 #include "Database/osgBridgeNode.h"
 #include "Database/osgBridgePagedLOD.h"
@@ -12,6 +13,7 @@ AosgBridgeMeshActor::AosgBridgeMeshActor() :
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	_pView = nullptr;
 	_pRuntimeMeshComponentStatic = CreateDefaultSubobject<URuntimeMeshComponentStatic>(TEXT("RuntimeMeshComponentStatic"));
 	_pDefaultMaterial = Cast<UMaterialInterface>(StaticLoadObject(UMaterialInterface::StaticClass(), nullptr,
 		TEXT("Material'/UE_osgBridge/UE_osgBridge_DefaultMaterial_4_27.UE_osgBridge_DefaultMaterial_4_27'")));
@@ -120,6 +122,11 @@ bool AosgBridgeMeshActor::IsMeshSectionVisible(int32 sectionID)
 		return false;
 	else
 		return false;
+}
+
+osgBridgeView* AosgBridgeMeshActor::GetViewInfo()
+{
+	return _pView;
 }
 
 void AosgBridgeMeshActor::Tick(float deltaTime)

@@ -1,4 +1,5 @@
 #include "osgBridgeView.h"
+#include "osgBridgeEngineSubsystem.h"
 
 float osgBridgeView::GetSphereBoundsPixelSizeInView(const FBoxSphereBounds& sphereBounds, bool bABS /*= true*/)
 {

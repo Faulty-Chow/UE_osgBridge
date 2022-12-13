@@ -10,5 +10,4 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 	virtual bool IsTickable() const override { return true; }
-	virtual bool IsTickableInEditor() const override { return false; }
 };

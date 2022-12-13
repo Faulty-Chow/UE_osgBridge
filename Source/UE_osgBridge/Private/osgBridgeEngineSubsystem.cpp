@@ -36,48 +36,19 @@ void UosgBridgeEngineSubsystem::LoadNodeFiles(FString dirPath)
 
 bool UosgBridgeEngineSubsystem::IsTickable() const
 {
-	if (_pMeshActor && _mountRootNodes.Num() > 0)
+	if ( _pMeshActor && _mountRootNodeList.Num() > 0)
 		return true;
 	return false;
 }
 
 void UosgBridgeEngineSubsystem::Tick(float DeltaTime)
 {
-	osgBridgeDatabase::GetOsgBridgeDatabase()->ClearPendingKillNodes();
-
-	if (_pView->IsTickable())
-		_pView->Tick(DeltaTime);
-
 	osgBridgeViewUpdateTask* task;
 	std::unique_lock<std::mutex> lock(_viewUpdateTaskQueueMutex);
 	while (_viewUpdateTaskQueue.Dequeue(task))
 		_pThreadPoolStatic->RequestExecuteTask(task);
 
-
-	/*if (_mountRootNodeList.Num() > 0)
-	{
-		check(GetMeshActor());
-
-		if (_pView->IsTickable())
-			_pView->Tick(DeltaTime);
-
-		if (_mountRootNodeList.Num() == 0)
-		{
-			UE_LOG(LogTemp, Error, TEXT("No need tick."));
-			return;
-		}
-
-		_traverseIndex = 0;
-		_tickDoneCount = 0;
-		for (auto& pThread : _tickableThreadPool)
-			pThread->Tick(DeltaTime);
-
-		{
-			std::unique_lock<std::mutex> lock(_tickableThreadMutex);
-			while (_tickDoneCount < _numTickableThreads)
-				_tickDoneCondition.wait(lock);
-		}
-	}	*/
+	osgBridgeDatabase::GetOsgBridgeDatabase()->ClearPendingKillNodes();
 }
 
 void UosgBridgeEngineSubsystem::Initialize(FSubsystemCollectionBase& Collection)
@@ -86,7 +57,6 @@ void UosgBridgeEngineSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 	_pThreadPoolStatic = new osgBridgeThreadPoolStatic(20);
 	_pThreadPoolStatic->Create();
 	_pMeshActor = nullptr;
-	_pView = new osgBridgePawn;
 }
 
 void UosgBridgeEngineSubsystem::Deinitialize()
@@ -113,19 +83,8 @@ UosgBridgeEngineSubsystem* UosgBridgeEngineSubsystem::GetOsgBridgeEngineSubsyste
 
 osgBridgeView* UosgBridgeEngineSubsystem::GetCurrentViewInfo()
 {
-	return _pView;
-	/*if (GetWorld()->HasBegunPlay())
-	{
-		if (dynamic_cast<osgBridgePawn*>(_pView) == nullptr)
-		{
-			delete _pView;
-			_pView = new osgBridgePawn;
-		}
-	}
-	else
-	{
-		return nullptr;
-	}*/
+	if (_pMeshActor)
+		return _pMeshActor->GetViewInfo();
 	return nullptr;
 }
 
@@ -182,7 +141,21 @@ void UosgBridgeEngineSubsystem::MountRootNode(DatabaseKey databaseKey)
 {
 	{
 		std::unique_lock<std::mutex> lock(_mountRootNodeListMutex);
-		_mountRootNodes.Emplace(databaseKey);
+		_mountRootNodeList.Emplace(databaseKey);
 	}
 	ViewUpdateTaskEnqueue(new osgBridgeViewUpdateTask(databaseKey));
+}
+
+bool UosgBridgeEngineSubsystem::CoreThreadTickCallback(osgBridgeCoreThread* pThread)
+{
+	static int32 index = 0;
+	std::unique_lock<std::mutex> lock(_mountRootNodeListMutex);
+	if (index < _mountRootNodeList.Num())
+	{
+		pThread->SetDatabaseKey(_mountRootNodeList[index]);
+		++index;
+		return true;
+	}
+	else
+		return false;
 }

@@ -6,6 +6,7 @@ public class UE_osgBridge_Editor : ModuleRules
 {
 	public UE_osgBridge_Editor(ReadOnlyTargetRules Target) : base(Target)
 	{
+		bUseRTTI = true;
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		
 		PublicIncludePaths.AddRange(
@@ -28,6 +29,7 @@ public class UE_osgBridge_Editor : ModuleRules
 				"Core",
 				// ... add other public dependencies that you statically link with here ...
 				"UnrealEd",
+				"UE_osgBridge",
 			}
 			);
 			

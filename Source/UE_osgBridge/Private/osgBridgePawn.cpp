@@ -15,13 +15,13 @@ osgBridgePawn::osgBridgePawn(const osgBridgePawn& other)
 
 void osgBridgePawn::Tick(float DeltaTime)
 {
-	check(IsInGameThread());
 	std::unique_lock<std::mutex> lock(_rwMutex);
+	_bValid = false;
+	_lastTickTimeStamp = FDateTime::Now();
+	_lastTickFrameNumber = UKismetSystemLibrary::GetFrameCount();
 	UWorld* world = UosgBridgeEngineSubsystem::GetOsgBridgeEngineSubsystem()->GetWorld();
 	if (world)
 	{
-		_lastTickTimeStamp = FDateTime::Now();
-		_lastTickFrameNumber = UKismetSystemLibrary::GetFrameCount();
 		APlayerController* playerController = world->GetFirstPlayerController();
 		if (playerController)
 		{

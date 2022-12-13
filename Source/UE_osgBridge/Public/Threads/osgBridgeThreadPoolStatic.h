@@ -19,6 +19,9 @@ public:
 	bool IsTickable() const { return false; }
 	bool IsTickableInEditor() const { return false; }
 
+	void Pause();
+	void Resume();
+
 	/*CoreThread & GameThread Only.*/
 	FORCEINLINE void RequestExecuteTask(class osgBridgeAsyncTask* task);
 
